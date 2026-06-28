@@ -6,15 +6,18 @@ import 'package:http/http.dart' as http;
 import 'package:weatherapp_flutter/weather_model.dart';
 
 class WeatherService {
+  // ignore: constant_identifier_names
   static const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
   final String apiKey;
 
   WeatherService(this.apiKey);
 
   Future<WeatherModel> getWeather(String cityName) async {
+    // ignore: non_constant_identifier_names
     final Response = await http.get(
       Uri.parse('$BASE_URL?q=$cityName&appid=$apiKey&units=metric'),
     );
+
     if (Response.statusCode == 200) {
       return WeatherModel.fromJson(jsonDecode(Response.body));
     } else {
@@ -30,6 +33,7 @@ class WeatherService {
     }
 
     Position position = await Geolocator.getCurrentPosition(
+      // ignore: deprecated_member_use
       desiredAccuracy: LocationAccuracy.high,
     );
 
